@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Limits Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Starfield canvas -->
+<canvas id="starfield"></canvas>
+
+<div class="app">
+  <div class="card">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-title">
+        <span class="dot"></span>
+        AI Limits Tracker
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary" onclick="openAddModal()">+ Add Email</button>
+        <button class="btn btn-icon" title="Refresh" onclick="renderTable()">&#8635;</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SL<br>NO</th>
+            <th>EMAIL ID</th>
+            <th>GEMINI TIME LIMIT</th>
+            <th>CLAUDE TIME LIMIT</th>
+            <th>REAL TIME LIMIT OF GEMINI</th>
+            <th>REAL TIME LIMIT OF CLAUDE</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Add Modal ── -->
+<div class="overlay" id="addOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAddModal()">&#x2715;</button>
+    <h2>Add Email Account</h2>
+    <div class="field">
+      <label>Email ID</label>
+      <input type="email" id="addEmail" placeholder="example@gmail.com" />
+    </div>
+
+    <div class="section-sep">Gemini</div>
+    <div class="modal-row">
+      <div class="field">
+        <label>Status</label>
+        <select id="addGeminiStatus">
+          <option value="available">Available</option>
+          <option value="limited">Limited</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Reset At</label>
+        <input type="datetime-local" id="addGeminiReset" />
+      </div>
+    </div>
+
+    <div class="section-sep">Claude</div>
+    <div class="modal-row">
+      <div class="field">
+        <label>Status</label>
+        <select id="addClaudeStatus">
+          <option value="available">Available</option>
+          <option value="limited">Limited</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Reset At</label>
+        <input type="datetime-local" id="addClaudeReset" />
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="closeAddModal()">Cancel</button>
+      <button class="btn btn-save" onclick="saveAdd()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Edit Modal ── -->
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeEditModal()">&#x2715;</button>
+    <h2 id="editTitle">Edit Account</h2>
+    <div class="field">
+      <label>Email ID</label>
+      <input type="email" id="editEmail" />
+    </div>
+
+    <div class="section-sep">Gemini</div>
+    <div class="modal-row">
+      <div class="field">
+        <label>Status</label>
+        <select id="editGeminiStatus">
+          <option value="available">Available</option>
+          <option value="limited">Limited</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Reset At</label>
+        <input type="datetime-local" id="editGeminiReset" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Smart Paste (Gemini)</label>
+      <input type="text" id="editGeminiPaste" placeholder='e.g. "3h", "8:08 PM", "9/25/2026 2:04 PM"' oninput="smartPaste('Gemini')" />
+      <div class="paste-hint">Type any format and the Reset At field auto-fills</div>
+    </div>
+
+    <div class="section-sep">Claude</div>
+    <div class="modal-row">
+      <div class="field">
+        <label>Status</label>
+        <select id="editClaudeStatus">
+          <option value="available">Available</option>
+          <option value="limited">Limited</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Reset At</label>
+        <input type="datetime-local" id="editClaudeReset" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Smart Paste (Claude)</label>
+      <input type="text" id="editClaudePaste" placeholder='e.g. "3h", "6:29 PM", "9/25/2026 6:29 PM"' oninput="smartPaste('Claude')" />
+      <div class="paste-hint">Type any format and the Reset At field auto-fills</div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="deleteRow()">Delete</button>
+      <button class="btn btn-primary" onclick="closeEditModal()">Cancel</button>
+      <button class="btn btn-save" onclick="saveEdit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
