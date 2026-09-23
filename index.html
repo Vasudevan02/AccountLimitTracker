@@ -8,20 +8,27 @@
 </head>
 <body>
 
+<!-- Ambient Glass Orbs Background -->
+<div class="ambient-glow orb-1"></div>
+<div class="ambient-glow orb-2"></div>
+<div class="ambient-glow orb-3"></div>
+
 <!-- Starfield canvas -->
 <canvas id="starfield"></canvas>
 
 <div class="app">
-  <div class="card">
+  <div class="card glass-panel">
 
     <!-- Header -->
     <div class="header">
       <div class="header-title">
-        <span class="dot"></span>
+        <span class="dot pulse"></span>
         AI Limits Tracker
       </div>
       <div class="header-actions">
-        <button class="btn btn-primary" onclick="openAddModal()">+ Add Email</button>
+        <button class="btn btn-primary" onclick="openAddModal()">
+          <span class="btn-icon-symbol">+</span> Add Email
+        </button>
         <button class="btn btn-icon" title="Refresh" onclick="renderTable()">&#8635;</button>
       </div>
     </div>
@@ -48,7 +55,7 @@
 
 <!-- ── Add Modal ── -->
 <div class="overlay" id="addOverlay">
-  <div class="modal">
+  <div class="modal glass-modal">
     <button class="modal-close" onclick="closeAddModal()">&#x2715;</button>
     <h2>Add Email Account</h2>
     <div class="field">
@@ -87,7 +94,7 @@
     </div>
 
     <div class="modal-actions">
-      <button class="btn btn-primary" onclick="closeAddModal()">Cancel</button>
+      <button class="btn btn-secondary" onclick="closeAddModal()">Cancel</button>
       <button class="btn btn-save" onclick="saveAdd()">Add</button>
     </div>
   </div>
@@ -95,7 +102,7 @@
 
 <!-- ── Edit Modal ── -->
 <div class="overlay" id="editOverlay">
-  <div class="modal">
+  <div class="modal glass-modal">
     <button class="modal-close" onclick="closeEditModal()">&#x2715;</button>
     <h2 id="editTitle">Edit Account</h2>
     <div class="field">
@@ -145,7 +152,7 @@
 
     <div class="modal-actions">
       <button class="btn btn-danger" onclick="deleteRow()">Delete</button>
-      <button class="btn btn-primary" onclick="closeEditModal()">Cancel</button>
+      <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
       <button class="btn btn-save" onclick="saveEdit()">Save</button>
     </div>
   </div>
